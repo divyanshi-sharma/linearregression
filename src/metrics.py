@@ -12,4 +12,10 @@ def mean_squared_error(estimates, targets):
 
     https://en.wikipedia.org/wiki/Mean_squared_error
     """
-    raise NotImplementedError()
+    n = len(targets)
+    diff_array = np.array([])
+    for i in range(0, n):
+        diff_array = np.append(diff_array, (targets[i]-estimates[i]) ** 2)
+    summed = np.sum(diff_array)
+    MSE = (1/n) * summed
+    return MSE

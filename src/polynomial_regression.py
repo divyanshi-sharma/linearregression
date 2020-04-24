@@ -50,7 +50,7 @@ class PolynomialRegression():
             degree (int): Degree of polynomial used to fit the data.
         """
         self.degree = degree
-        raise NotImplementedError()
+
     
     def fit(self, features, targets):
         """

@@ -1,12 +1,11 @@
 {
-    "score": 0,
-    "tests_passed": 0,
+    "score": 40,
+    "tests_passed": 2,
     "notes": {
-        "test_mean_squared_error": "FAIL",
+        "test_mean_squared_error": "PASS",
         "test_polynomial_regression": "FAIL",
-        "test_generate_regression_data": "FAIL",
+        "test_generate_regression_data": "PASS",
         "test_perceptron": "FAIL",
-        "test_transform_data": "FAIL",
-        "test_netid": "FAIL - REQUIRED (automatic zero)"
+        "test_transform_data": "FAIL"
     }
 }
