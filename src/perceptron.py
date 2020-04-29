@@ -19,7 +19,7 @@ def transform_data(features):
     Returns:
         transformed_features (np.ndarray): features after being transformed by the function
     """
-    raise NotImplementedError()
+    plt.show(features)
 
 class Perceptron():
     def __init__(self, max_iterations=200):
@@ -65,14 +65,27 @@ class Perceptron():
             None (saves model and training data internally)
         """
         itns = 0
-        weights = np.random.rand(1,3)
-        weights[0,0] = 1
-        y = np.zeros(features.shape[0])
-        while np.array_equal(weights_prev,weights) and itns<self.max_iterations:
+        weights = np.zeros(3)
+        weights[0] = 1
+        y = np.ones(features.shape[0])
+        classif = np.ones(features.shape[0])
+        features = np.column_stack((np.ones(features.shape[0]), features))
+        prev_weights = np.ones(3)
+        while (not np.allclose(prev_weights, weights)) or itns < self.max_iterations:
+            prev_weights = weights
             for i in range(features.shape[0]):
-                if targets[i] != weights:
-                    weights[i] = weights[i] + features[i, :] * targets[i]
-        print(features)
+                y[i] = np.dot(weights, features[i,:])
+                if y[i] > 0:
+                    classif[i] = 1
+                elif y[i] == 0:
+                    classif[i] = 0
+                else:
+                    classif[i] = -1
+                if targets[i] != classif[i]:
+                    weights = prev_weights + features[i, :] * targets[i]
+            itns += 1
+        self.weights = weights
+        print(weights)
 
     def predict(self, features):
         """
@@ -84,7 +97,18 @@ class Perceptron():
         Returns:
             predictions (np.ndarray): Output of saved model on features.
         """
-        raise NotImplementedError()
+        features = np.column_stack((np.ones(features.shape[0]), features))
+        predictions = np.array([])
+        multiplied = np.array([])
+        for i in range(features.shape[0]):
+            multiplied = np.append(multiplied, np.dot(features[i,:], self.weights))
+        for i in range(len(multiplied)):
+            if multiplied[i] < 0:
+                predictions = np.append(predictions, -1)
+            else:
+                predictions = np.append(predictions, 1)
+        return predictions
+
 
     def visualize(self, features, targets):
         """
