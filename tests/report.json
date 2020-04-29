@@ -1,9 +1,9 @@
 {
-    "score": 40,
-    "tests_passed": 2,
+    "score": 60,
+    "tests_passed": 3,
     "notes": {
         "test_mean_squared_error": "PASS",
-        "test_polynomial_regression": "FAIL",
+        "test_polynomial_regression": "PASS",
         "test_generate_regression_data": "PASS",
         "test_perceptron": "FAIL",
         "test_transform_data": "FAIL"

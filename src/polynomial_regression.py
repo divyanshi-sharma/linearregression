@@ -66,7 +66,18 @@ class PolynomialRegression():
         Returns:
             None (saves model and training data internally)
         """
-        raise NotImplementedError()
+        x = np.array([])
+        for i in range(0, features.shape[0]):
+            for j in range(0, (self.degree+1)):
+                x = np.append(x, features[i] ** j)
+        x = x.reshape(features.shape[0], self.degree + 1)
+        x_t = x.transpose()
+        inside_paren = np.matmul(x_t, x)
+        x_inv = np.linalg.inv(inside_paren)
+        partial = np.matmul(x_inv, x_t)
+        weights = np.matmul(partial, targets)
+        weights.shape = [1, self.degree+1]
+        self.weights = weights
 
     def predict(self, features):
         """
@@ -78,7 +89,16 @@ class PolynomialRegression():
         Returns:
             predictions (np.ndarray): Output of saved model on features.
         """
-        raise NotImplementedError()
+        aug_features = np.array([])
+        '''for i in range(0, len(features)):
+            aug_features = np.append(aug_features, (features[i] ** i))'''
+
+        for i in range(0, features.shape[0]):
+            for j in range(0, (self.degree+1)):
+                aug_features = np.append(aug_features, features[i] ** j)
+        aug_features = aug_features.reshape(features.shape[0], self.degree + 1)
+        predictions = np.matmul(aug_features, self.weights.transpose())
+        return predictions
 
     def visualize(self, features, targets):
         """

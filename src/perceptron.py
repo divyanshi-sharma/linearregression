@@ -48,7 +48,7 @@ class Perceptron():
 
         """
         self.max_iterations = max_iterations
-        raise NotImplementedError()
+
 
     def fit(self, features, targets):
         """
@@ -64,7 +64,15 @@ class Perceptron():
         Returns:
             None (saves model and training data internally)
         """
-        raise NotImplementedError()
+        itns = 0
+        weights = np.random.rand(1,3)
+        weights[0,0] = 1
+        y = np.zeros(features.shape[0])
+        while np.array_equal(weights_prev,weights) and itns<self.max_iterations:
+            for i in range(features.shape[0]):
+                if targets[i] != weights:
+                    weights[i] = weights[i] + features[i, :] * targets[i]
+        print(features)
 
     def predict(self, features):
         """
