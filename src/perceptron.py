@@ -19,7 +19,12 @@ def transform_data(features):
     Returns:
         transformed_features (np.ndarray): features after being transformed by the function
     """
-    plt.show(features)
+    transformed_features = features
+    transformed_features = transformed_features ** 2
+
+    for i in range(features.shape[0]):
+        transformed_features[i,1] = np.sqrt(transformed_features[i,0]**2 + transformed_features[i,1]**2)
+    return transformed_features
 
 class Perceptron():
     def __init__(self, max_iterations=200):
@@ -74,7 +79,7 @@ class Perceptron():
         while (not np.allclose(prev_weights, weights)) or itns < self.max_iterations:
             prev_weights = weights
             for i in range(features.shape[0]):
-                y[i] = np.dot(weights, features[i,:])
+                y[i] = np.dot(weights, features[i, :])
                 if y[i] > 0:
                     classif[i] = 1
                 elif y[i] == 0:
@@ -85,7 +90,6 @@ class Perceptron():
                     weights = prev_weights + features[i, :] * targets[i]
             itns += 1
         self.weights = weights
-        print(weights)
 
     def predict(self, features):
         """

@@ -5,6 +5,6 @@
     "test_generate_regression_data": true,
     "test_a_imports": true,
     "test_perceptron": true,
-    "test_transform_data": false,
+    "test_transform_data": true,
     "test_netid": true
 }
